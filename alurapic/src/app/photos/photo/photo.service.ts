@@ -10,9 +10,9 @@ export class PhotoService {
   constructor(private http: HttpClient) { }
 
   // No service apenas declaramos o método e depois ele será injetado
-  listFromUser(username: string) {
+  listFromUser(nomeUsuario: string) {
     return this.http
-      .get<Photo[]>(API + '/flavio/photos');
+      .get<Photo[]>(API + '/' + nomeUsuario + '/photos');
 
   }
 
