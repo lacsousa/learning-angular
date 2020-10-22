@@ -10,7 +10,7 @@ import { PhotoService } from '../photo/photo.service';
 })
 export class PhotoListComponent implements OnInit {
 
-  photos : Photo[] = [];
+  photosListComponent : Photo[] = [];
 
 
   ngOnInit(): void{
@@ -21,7 +21,7 @@ export class PhotoListComponent implements OnInit {
     this.photoService
     .listFromUser(nameUser)
     .subscribe(
-        photos => this.photos = photos,
+        photos => this.photosListComponent = photos,
         err => console.log(err)
       );
   }
