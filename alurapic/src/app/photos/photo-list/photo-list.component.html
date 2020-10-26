@@ -1,1 +1,16 @@
+<!--  Aqui photo-list.component.html envolve o componente
+    que traz os dados e disponibiliza para photos.component.html
+-->
+<div class="text-center mt-3 mb-3">
+  <form>
+      <input
+          class="rounded"
+          type="search"
+          placeholder="search..."
+          autofocus
+          (keyup) = "filter = $event.target.value">
+  </form>
+  <!-- Cada valor que for digitado será acessar pela propriedade filter -->
+</div>
+
 <ap-photos [photosComponent]="photosListComponent" ></ap-photos>

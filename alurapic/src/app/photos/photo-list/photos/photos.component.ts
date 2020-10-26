@@ -16,6 +16,8 @@ export class PhotosComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.photosComponent)
+        // Esse photosComponent é atualizado com a inBound properties que tem
+        // o mesmo nome que sofreu a mudança
       this.rows = this.groupColumns(this.photosComponent);
   }
 
