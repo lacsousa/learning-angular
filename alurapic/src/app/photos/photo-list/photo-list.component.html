@@ -10,7 +10,8 @@
           autofocus
           (keyup) = "filter = $event.target.value">
   </form>
-  <!-- Cada valor que for digitado será acessar pela propriedade filter -->
+  <!--  (keyup) -> Binding de Eventos
+    Cada valor que for digitado será acessar pela propriedade filter -->
 </div>
 
-<ap-photos [photosComponent]="photosListComponent" ></ap-photos>
+<ap-photos [photosComponent]="photosListComponent | filterByDescription: filter" ></ap-photos>

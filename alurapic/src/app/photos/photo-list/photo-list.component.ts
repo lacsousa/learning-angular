@@ -11,7 +11,7 @@ import { PhotoService } from '../photo/photo.service';
 export class PhotoListComponent implements OnInit {
 
   photosListComponent : Photo[] = [];
-
+  filter: string = '';
 
   ngOnInit(): void{
 
