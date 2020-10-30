@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Photo } from '../photo/photo';
 import { PhotoService } from '../photo/photo.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ap-photo-list',
@@ -12,12 +14,19 @@ export class PhotoListComponent implements OnInit {
 
   photosListComponent : Photo[] = [];
   filter: string = '';
+  debounce: Subject<string> = new Subject<string>();
 
   ngOnInit(): void{
 
 
     this.photosListComponent = this.activatedRoute.snapshot.data.photosListResolve; //nome da propriedade no routing
 
+    // O Debounce vai fazer com que a busca espere um tempo pré-determinado
+    // Para que não sejam feitas várias requisições a cada digitação no campo filter
+
+    this.debounce
+    .pipe(debounceTime(300))
+    .subscribe(filter => this.filter = filter);
 
     // const nameUser = this.activatedRoute.snapshot.params.userName;
     // // Um observable é lazy. Ele só vai nos dados se alguém se inscrever nele pelo subscribe
@@ -28,6 +37,13 @@ export class PhotoListComponent implements OnInit {
     //     photos => this.photosListComponent = photos,
     //     err => console.log(err)
     //   );
+  }
+
+  ngOnDestroy() {
+    // porque vc tá trabalhando com um Observer que não tem um Complete
+    // senão usar o destroy vc vai ficar ocupando memória com esse componente
+    // evitando o memory leak
+    this.debounce.unsubscribe();
   }
 
    // Apenas para injeção de dependências

@@ -8,7 +8,7 @@
           type="search"
           placeholder="search..."
           autofocus
-          (keyup) = "filter = $event.target.value">
+          (keyup) = "debounce.next($event.target.value)">
   </form>
   <!--  (keyup) -> Binding de Eventos
     Cada valor que for digitado será acessar pela propriedade filter -->

@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
             return res.sendStatus(401);
         }
     } else {
-        console.log('Toke is missing!');
+        console.log('Token is missing!');
         return res.sendStatus(401);
     }
 }
