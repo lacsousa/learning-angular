@@ -15,3 +15,8 @@
 </div>
 
 <ap-photos [photosComponent]="photosListComponent | filterByDescription: filter" ></ap-photos>
+
+<ap-load-button
+  (click)="load()"
+  [hasMore]="hasMore">
+</ap-load-button>
