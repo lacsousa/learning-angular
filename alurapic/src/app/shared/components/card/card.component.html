@@ -1,0 +1,10 @@
+
+<div class="card border-light text-center">
+  <h4 class="card-header">{{ title }}</h4>
+  <div class="card-block text-justify">
+      <!-- Precisamos indicar, no elemento pai,
+        o local no qual os elementos filhos serão adicionados
+        e fazemos isso através de ng-content. -->
+      <ng-content></ng-content>
+  </div>
+</div>
