@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+
 import { Photo } from '../photo/photo';
 import { PhotoService } from '../photo/photo.service';
-import { debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'ap-photo-list',
@@ -14,7 +14,7 @@ export class PhotoListComponent implements OnInit {
 
   photosListComponent : Photo[] = [];
   filter: string = '';
-  debounce: Subject<string> = new Subject<string>();
+
   hasMore: boolean = true;
   currentPage: number = 1;
   userName: string = '';
@@ -26,9 +26,11 @@ export class PhotoListComponent implements OnInit {
 
     // O Debounce vai fazer com que a busca espere um tempo pré-determinado
     // Para que não sejam feitas várias requisições a cada digitação no campo filter
-    this.debounce
-    .pipe(debounceTime(300))
-    .subscribe(filter => this.filter = filter);
+
+      // Comentar no momento da componentização do filtro
+    // this.debounce
+    // .pipe(debounceTime(300))
+    // .subscribe(filter => this.filter = filter);
 
     // const nameUser = this.activatedRoute.snapshot.params.userName;
     // // Um observable é lazy. Ele só vai nos dados se alguém se inscrever nele pelo subscribe
@@ -41,12 +43,13 @@ export class PhotoListComponent implements OnInit {
     //   );
   }
 
-  ngOnDestroy() {
-    // porque vc tá trabalhando com um Observer que não tem um Complete
-    // senão usar o destroy vc vai ficar ocupando memória com esse componente
-    // evitando o memory leak
-    this.debounce.unsubscribe();
-  }
+  // Comentar no momento da componentização do filtro
+  // ngOnDestroy() {
+  //   // porque vc tá trabalhando com um Observer que não tem um Complete
+  //   // senão usar o destroy vc vai ficar ocupando memória com esse componente
+  //   // evitando o memory leak
+  //   this.debounce.unsubscribe();
+  // }
 
   load() {
     this.photoService
@@ -56,6 +59,7 @@ export class PhotoListComponent implements OnInit {
         // O angular só detecta lá no photosComponent numa Inbound property
         // que houve mudança
         // se houver novos valores nela
+        this.filter = '';
         this.photosListComponent = this.photosListComponent.concat(photosListComponent);
         if (!photosListComponent.length) this.hasMore = false;
       });

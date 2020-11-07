@@ -1,0 +1,17 @@
+<!--  Aqui photo-list.component.html envolve o componente
+    que traz os dados e disponibiliza para photos.component.html
+-->
+<div class="text-center mt-3 mb-3">
+  <form>
+    <i aria-hidden="true" class="fa fa-search"></i>
+      <input
+          class="rounded"
+          type="search"
+          placeholder="search..."
+          autofocus
+          (keyup) = "debounce.next($event.target.value)"
+          [value] = "valorDigitadoSearch">
+  </form>
+  <!--  (keyup) -> Binding de Eventos
+    Cada valor que for digitado será acessar pela propriedade filter -->
+</div>
