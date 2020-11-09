@@ -1,0 +1,12 @@
+.titulo-photos {
+  font-size: 40px;
+  color: #001aff;
+  display: inline-block;
+  padding: 1px 10px;
+  border: 2px dotted #ff6e00;
+  border-radius: 12px;
+  background-color: #fbffff;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
