@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class VMessageComponent{
 
-  @Input() textMessage = '';
+  @Input() textMsg = '';
 }
