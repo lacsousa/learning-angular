@@ -8,11 +8,11 @@
             class="form-control"
             placeholder="user name"
             autofocus>
-        <small
+        <ap-vmessage
           *ngIf="loginForm.get('userName').errors?.required"
-          class="text-danger d-block mt-2">
-            User name is required!
-        </small>
+          text="User name is required!">
+        </ap-vmessage>
+
     </div>
 
     <div class="form-group">
@@ -21,11 +21,10 @@
             type="password"
             class="form-control"
             placeholder="password">
-        <small
+        <ap-vmessage
           *ngIf="loginForm.get('password').errors?.required"
-          class="text-danger d-block mt-2">
-            Password is required!
-        </small>
+          text="Password is required!">
+        </ap-vmessage>
     </div>
 
     <button
