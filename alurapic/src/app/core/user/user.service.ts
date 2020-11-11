@@ -8,13 +8,15 @@ import jwt_decode from 'jwt-decode';
 export class UserService {
 
   private userBehaviorSubject =  new BehaviorSubject<User>(null);
+  private userName: string;
   // Qdo vc usa o Subject vc emit o valor via next()
   // no BehaviorSubject vc já inicia com um valor
 
   constructor(private tokenService: TokenService) {
 
-    this.tokenService.hasToken() &&
+     this.tokenService.hasToken() &&
       this.decodeAndNotify();
+
   }
 
   setToken(token: string) {
@@ -26,6 +28,7 @@ export class UserService {
   private decodeAndNotify() {
     const token = this.tokenService.getToken();
     const user = jwt_decode(token) as User; //cast
+    this.userName = user.name;
     this.userBehaviorSubject.next(user);
 }
 
@@ -33,6 +36,16 @@ export class UserService {
     return this.userBehaviorSubject.asObservable();
   }
 
+  logout() {
+    this.tokenService.removeToken();
+    this.userBehaviorSubject.next(null);
+  }
 
+  isLogged() {
+    return this.tokenService.hasToken();
+  }
 
+  getUserName(){
+    return this.userName;
+  }
 }
