@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
-import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.servive';
+import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
 
 
 @Component({
@@ -28,6 +28,9 @@ export class SignInComponent implements OnInit{
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.platformDetectorService.isPlatformBrowser &&
+    this.userNameInput.nativeElement.focus();
 
   }
 
