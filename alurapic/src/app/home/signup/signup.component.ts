@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
 
   signupForm: FormGroup;
 
-  @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement>;
+  @ViewChild('variavelTemplateEmailInput') emailInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,10 +58,10 @@ export class SignUpComponent implements OnInit {
           Validators.maxLength(14)
         ]
     ]
-    })
+    });
 
     this.platformDetectorService.isPlatformBrowser &&
-    this.emailInput.nativeElement.focus();
+      this.emailInput.nativeElement.focus();
   }
 
 

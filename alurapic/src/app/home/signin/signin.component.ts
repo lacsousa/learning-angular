@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit{
     });
 
     this.platformDetectorService.isPlatformBrowser &&
-    this.userNameInput.nativeElement.focus();
+      this.userNameInput.nativeElement.focus();
 
   }
 

@@ -2,8 +2,7 @@
 
 <form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
   <div class="form-group">
-    <input #variavelTemplateUserName
-      formControlName="userName"
+    <input #variavelTemplateUserName formControlName="userName"
       class="form-control"
       placeholder="user name"
       autofocus
@@ -28,8 +27,7 @@
   <button
     [disabled]="loginForm.invalid"
     type="submit"
-    class="btn btn-primary btn-block"
-  >
+    class="btn btn-primary btn-block">
     login
   </button>
 </form>
