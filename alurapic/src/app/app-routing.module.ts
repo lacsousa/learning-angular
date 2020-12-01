@@ -6,8 +6,6 @@ import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: () => import('./home/home.module').then(h=>h.HomeModule)
   },
   {
     path: 'user/:userName',
