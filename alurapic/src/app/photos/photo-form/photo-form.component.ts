@@ -12,12 +12,14 @@ export class PhotoFormComponent implements OnInit {
 
   photoForm : FormGroup;
   file: File;
+  preview: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
     private router: Router
     ) { }
+
 
   ngOnInit(): void {
     this.photoForm = this.formBuilder.group({
@@ -26,6 +28,7 @@ export class PhotoFormComponent implements OnInit {
       allowComments: [true]
     })
   }
+
 
   upload() {
     // const dados = this.photoForm.getRawValue();
@@ -38,6 +41,15 @@ export class PhotoFormComponent implements OnInit {
     this.photoService
       .upload(description, allowComments, this.file)
       .subscribe(() => this.router.navigate(['']))
+  }
 
+
+  handleFile(file: File) {
+    // a ideia aqui é converter para a Base64
+    this.file = file;
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.preview = event.target.result;
+    reader.readAsDataURL(file);
   }
 }
