@@ -5,8 +5,10 @@
     "requires"
   ],
   "cSpell.ignoreWords": [
+    "alert",
     "autentication",
     "guard",
-    "requires"
+    "requires",
+    "service"
   ]
 }
