@@ -1,12 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+
 import { Photo } from './photo';
 import { PhotoComment } from './photo-comment';
 
 
 const API = 'http://localhost:3000';
 
-@Injectable( { providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PhotoService {
 
   constructor(private http: HttpClient) { }
@@ -20,14 +24,14 @@ export class PhotoService {
 
   listFromUserPaginated(nomeUsuario: string, page: number) {
     const parametros = new HttpParams()
-          .append('page', page.toString());
+      .append('page', page.toString());
 
     return this.http
-      .get<Photo[]>(API + '/' + nomeUsuario + '/photos',  { params : parametros } );
+      .get<Photo[]>(API + '/' + nomeUsuario + '/photos', { params: parametros });
 
   }
 
-  upload(description: string, allowComments: boolean, file:File) {
+  upload(description: string, allowComments: boolean, file: File) {
 
     // Quando tem um arquivo envolvido na história usa-se formdata ao invés de Json
     const formData = new FormData();
@@ -54,12 +58,24 @@ export class PhotoService {
 
     return this.http.post(
       API + '/photos/' + photoId + '/comments', { commentText }
-      );
+    );
   }
 
-  removePhoto(photoId: number){
+  removePhoto(photoId: number) {
 
     return this.http.delete(API + '/photos/' + photoId);
 
+  }
+
+  like(photoId: number) {
+
+    return this.http.post(
+      // Se quiser resposta adiciona esse 3o. parâmetro
+      API + '/photos/' + photoId + '/like', {}, { observe: 'response' }
+    )
+      .pipe(map(res => true))
+      .pipe(catchError(err => {
+        return err.status == '304' ? of(false) : throwError(err);
+      }));
   }
 }
