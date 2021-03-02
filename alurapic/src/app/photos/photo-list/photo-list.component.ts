@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 import { Photo } from '../photo/photo';
 import { PhotoService } from '../photo/photo.service';
@@ -12,14 +13,22 @@ import { PhotoService } from '../photo/photo.service';
 })
 export class PhotoListComponent implements OnInit {
 
-  photosListComponent : Photo[] = [];
+  photosListComponent: Photo[] = [];
   filter: string = '';
 
   hasMore: boolean = true;
   currentPage: number = 1;
   userName: string = '';
 
-  ngOnInit(): void{
+  // Apenas para injeção de dependências
+  constructor(
+    private photoService: PhotoService,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+
+
+  ngOnInit(): void {
 
     this.userName = this.activatedRoute.snapshot.params.userName;
     this.photosListComponent = this.activatedRoute.snapshot.data.photosListResolve; //nome da propriedade no routing
@@ -27,7 +36,7 @@ export class PhotoListComponent implements OnInit {
     // O Debounce vai fazer com que a busca espere um tempo pré-determinado
     // Para que não sejam feitas várias requisições a cada digitação no campo filter
 
-      // Comentar no momento da componentização do filtro
+    // Comentar no momento da componentização do filtro
     // this.debounce
     // .pipe(debounceTime(300))
     // .subscribe(filter => this.filter = filter);
@@ -54,7 +63,7 @@ export class PhotoListComponent implements OnInit {
   load() {
     this.photoService
       .listFromUserPaginated(this.userName, ++this.currentPage)
-      .subscribe( photosListComponent => {
+      .subscribe(photosListComponent => {
 
         // O angular só detecta lá no photosComponent numa Inbound property
         // que houve mudança
@@ -65,11 +74,6 @@ export class PhotoListComponent implements OnInit {
       });
   }
 
-   // Apenas para injeção de dependências
-   constructor(
-     private photoService : PhotoService,
-     private activatedRoute : ActivatedRoute
-     ){}
 
 
 }
