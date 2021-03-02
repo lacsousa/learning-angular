@@ -56,15 +56,23 @@
         </label>
       </div>
 
-      <button
-        [disabled]="photoForm.invalid"
-        type="submit"
-        class="btn btn-primary btn-block"
-      >
-        Upload
-      </button>
+      <div *ngIf="!percentDone; else areaUpload">
+        <button
+          [disabled]="photoForm.invalid"
+          type="submit"
+          class="btn btn-primary btn-block">
+          Upload
+        </button>
 
-      <a class="btn btn-secondary btn-block">Cancel</a>
+        <a [routerLink]="['']" class="btn btn-secondary btn-block">Cancel</a>
+
+      </div>
+      
+      <ng-template #areaUpload>
+        <div class="text-center display-4">
+          Uploading {{ percentDone }}%
+        </div>
+      </ng-template>
     </div>
   </form>
 </div>
