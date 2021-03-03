@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { UserService } from "src/app/core/user/user.service";
 import { AlertService } from "src/app/shared/components/alert/alert.service";
 import { Photo } from "../photo/photo";
-import { PhotoComment } from "../photo/photo-comment";
 import { PhotoService } from "../photo/photo.service";
 
 @Component({

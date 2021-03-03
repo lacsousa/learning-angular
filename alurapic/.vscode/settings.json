@@ -10,7 +10,9 @@
     "component",
     "guard",
     "loading",
+    "log",
     "requires",
+    "server",
     "service"
   ]
 }
