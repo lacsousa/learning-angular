@@ -4,17 +4,17 @@ import { TokenService } from '../token/token.service';
 import { User } from './user';
 import jwt_decode from 'jwt-decode';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private userBehaviorSubject =  new BehaviorSubject<User>(null);
+  private userBehaviorSubject = new BehaviorSubject<User>(null);
   private userName: string;
   // Qdo vc usa o Subject vc emit o valor via next()
   // no BehaviorSubject vc já inicia com um valor
 
   constructor(private tokenService: TokenService) {
 
-     this.tokenService.hasToken() &&
+    this.tokenService.hasToken() &&
       this.decodeAndNotify();
 
   }
@@ -30,7 +30,7 @@ export class UserService {
     const user = jwt_decode(token) as User; //cast
     this.userName = user.name;
     this.userBehaviorSubject.next(user);
-}
+  }
 
   getUser() {
     return this.userBehaviorSubject.asObservable();
@@ -45,7 +45,7 @@ export class UserService {
     return this.tokenService.hasToken();
   }
 
-  getUserName(){
+  getUserName() {
     return this.userName;
   }
 }
