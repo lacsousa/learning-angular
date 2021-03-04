@@ -1,10 +1,10 @@
 <h4 class="text-center"> Register to embrace a new world!</h4>
 
-<form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
+<form #vTemplateFormSignUp="ngForm" [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
   <div class="form-group">
       <input #variavelTemplateEmailInput formControlName="email" class="form-control" placeholder="email" autofocus>
       <ap-vmessage
-          *ngIf="signupForm.get('email').errors?.required"
+          *ngIf="signupForm.get('email').errors?.required && vTemplateFormSignUp.submitted"
           textMsg="Email is required!">
       </ap-vmessage>
       <ap-vmessage
@@ -16,15 +16,15 @@
   <div class="form-group">
       <input formControlName="fullName" class="form-control" placeholder="full name">
       <ap-vmessage
-          *ngIf="signupForm.get('fullName').errors?.required"
+          *ngIf="signupForm.get('fullName').errors?.required && (vTemplateFormSignUp.submitted || signupForm.get('fullName').touched)"
           textMsg="Full name is required!">
-      </ap-vmessage>
+      </ap-vmessage> <!-- o touched serve para validar qdo vc perde o Foco-->
       <ap-vmessage
-          *ngIf="signupForm.get('fullName').errors?.minlength"
+          *ngIf="signupForm.get('fullName').errors?.minlength && vTemplateFormSignUp.submitted"
           textMsg="Minimum length is 2">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('fullName').errors?.maxlength"
+          *ngIf="signupForm.get('fullName').errors?.maxlength && vTemplateFormSignUp.submitted"
           textMsg="Maximum length is 40">
       </ap-vmessage>
   </div>
@@ -32,19 +32,19 @@
   <div class="form-group">
       <input formControlName="userName" class="form-control" placeholder="user name">
       <ap-vmessage
-          *ngIf="signupForm.get('userName').errors?.required"
+          *ngIf="signupForm.get('userName').errors?.required && vTemplateFormSignUp.submitted"
           textMsg="Username is required!">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('userName').errors?.minlength"
+          *ngIf="signupForm.get('userName').errors?.minlength && vTemplateFormSignUp.submitted"
           textMsg="Minimum length is 2">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('userName').errors?.maxlength"
+          *ngIf="signupForm.get('userName').errors?.maxlength && vTemplateFormSignUp.submitted"
           textMsg="Maximum length is 30">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('userName').errors?.lowerCase"
+          *ngIf="signupForm.get('userName').errors?.lowerCase && vTemplateFormSignUp.submitted"
           textMsg="Must be lowercase">
       </ap-vmessage>
       <ap-vmessage
@@ -59,21 +59,29 @@
   <div class="form-group">
       <input formControlName="password" type="password" class="form-control" placeholder="password">
       <ap-vmessage
-          *ngIf="signupForm.get('password').errors?.required"
+          *ngIf="signupForm.get('password').errors?.required && vTemplateFormSignUp.submitted"
           textMsg="Password is required!">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('password').errors?.minlength"
+          *ngIf="signupForm.get('password').errors?.minlength && vTemplateFormSignUp.submitted"
           textMsg="Minimum length is 8">
       </ap-vmessage>
       <ap-vmessage
-          *ngIf="signupForm.get('password').errors?.maxlength"
+          *ngIf="signupForm.get('password').errors?.maxlength && vTemplateFormSignUp.submitted"
           textMsg="Maximum length is 14">
       </ap-vmessage>
+
+      <ap-vmessage
+        *ngIf="signupForm.errors?.userNamePasswordValidator && vTemplateFormSignUp.submitted"
+        textMsg="Password must be different from the username!">
+    </ap-vmessage>
+
   </div>
 
-  <button [disabled]="signupForm.invalid || signupForm.pending"
-    class="btn btn-primary btn-block">Register</button>
+  <!--button [disabled]="signupForm.invalid || signupForm.pending"
+    class="btn btn-primary btn-block">Register</button-->
+
+  <button class="btn btn-primary btn-block">Register</button>
 
   <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>

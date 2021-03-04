@@ -41,7 +41,7 @@ export class PhotoService {
     formData.append('imageFile', file);
 
     return this.http.post(
-      API_URL + '/photos/uploadxxx',
+      API_URL + '/photos/upload',
       formData,
       {
         observe: 'events',

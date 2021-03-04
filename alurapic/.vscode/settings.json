@@ -11,8 +11,12 @@
     "guard",
     "loading",
     "log",
+    "name",
+    "password",
     "requires",
     "server",
-    "service"
+    "service",
+    "user",
+    "validator"
   ]
 }
