@@ -28,7 +28,7 @@ export class PhotoService {
       .append('page', page.toString());
 
     return this.http
-      .get<Photo[]>(API_URL + '/' + nomeUsuario + '/photos-xxxxx', { params: parametros });
+      .get<Photo[]>(API_URL + '/' + nomeUsuario + '/photos', { params: parametros });
 
   }
 

@@ -8,7 +8,7 @@
       <!-- Para poder usar o RouterLink precisa importar o RouterModule
         no módulo específico -->
       <a [routerLink]="['/p', photo.id]">
-        <ap-card [title]="photo.description">
+        <ap-card>
           <ap-photo [url]="photo.url" [description]="photo.description">
           </ap-photo>
           <div class="text-center">
