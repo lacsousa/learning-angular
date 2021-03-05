@@ -17,7 +17,16 @@ export class AuthGuard implements CanActivate {
 
       // console.log('Ativou a guarda de rota');
       if(!this.userService.isLogged()){
-        this.router.navigate(['']);
+        this.router.navigate(
+          [''],
+          {
+            queryParams: {
+              fromUrl: state.url
+              // Query params para guardar a rota onde eu queria ir antes
+              // da aplicação me jogar para o Login
+            }
+          }
+        );
         return false;
       }
       return true;
